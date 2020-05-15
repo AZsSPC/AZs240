@@ -31,9 +31,7 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(DataAdapter.ViewHolder holder, int position) {
         Post post = phones.get(position);
-        holder.author.setText(post.getAuthor());
         holder.text.setText(post.getText());
-        holder.date.setText(post.getDate());
         holder.title.setText(post.getTitle());
         holder.title.setBackgroundColor(post.getColor());
     }
@@ -44,13 +42,11 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView text, author, date, title;
+        final TextView text, title;
 
         ViewHolder(View view) {
             super(view);
-            author = view.findViewById(R.id.post_autor);
             text = view.findViewById(R.id.post_text);
-            date = view.findViewById(R.id.post_date);
             title = view.findViewById(R.id.post_title);
         }
     }

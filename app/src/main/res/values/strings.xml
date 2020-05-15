@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Чат 240</string>
+    <string name="app_name">Новини 240</string>
     <string name="i_c_d">_???_</string>
 
-    <string name="tab_name">AZs240 - чат школы;AZs240 - чат школи</string>
+    <string name="tab_name">AZs240 - новостная лента;AZs240 - стрiчка новин</string>
     <string name="tab_main">Лента;Стрiчка</string>
     <string name="tab_settings">Мой кабинет;Мiй кабiнет</string>
 

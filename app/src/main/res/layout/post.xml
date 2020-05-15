@@ -4,40 +4,11 @@
     android:id="@+id/post_lay"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background"
-    android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingTop="4dp"
-    android:paddingEnd="8dp"
-    android:paddingRight="8dp"
-    android:paddingBottom="4dp">
-
-    <LinearLayout
-        android:id="@+id/post_lay2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
-
-        <TextView
-            android:id="@+id/post_autor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/i_c_d"
-            android:textAlignment="textStart"
-            android:textAllCaps="false" />
-
-        <TextView
-            android:id="@+id/post_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/i_c_d"
-            android:textAlignment="textEnd"
-            android:textAllCaps="false" />
-    </LinearLayout>
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/post_title"
