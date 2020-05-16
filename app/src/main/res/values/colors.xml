@@ -4,6 +4,7 @@
     <color name="primaryDark">#255928</color>
     <color name="accent">#00ACC1</color>
     <color name="background">#D0E1D6</color>
+    <color name="background2">#A8C3B1</color>
     <color name="t_system">#AAAAAA</color>
     <color name="t_spy">#7EAABF</color>
     <color name="t_normal">#7CB342</color>

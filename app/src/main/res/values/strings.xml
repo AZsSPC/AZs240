@@ -2,12 +2,8 @@
     <string name="app_name">Новини 240</string>
     <string name="i_c_d">_???_</string>
 
-    <string name="tab_name">AZs240 - новостная лента;AZs240 - стрiчка новин</string>
-    <string name="tab_main">Лента;Стрiчка</string>
-    <string name="tab_settings">Мой кабинет;Мiй кабiнет</string>
+    <string name="tab_name">Стрічка новин</string>
+    <string name="tab_settings">Мій кабінет</string>
+    <string name="tab_create">Створення поста</string>
 
-    <string name="login_name">Ваше имя/Фамилия;Ваше iм`я/Призвище</string>
-    <string name="login_id">Идентификационный ID;Iдентифiкацiонний ID</string>
-    <string name="login_go">Готово;Готово</string>
-    <string name="login_info"> Пользователи не подтвердившие свою личность не могут создавать посты. \n\n ID можно получить у президента школы либо разработчика: (добавить контакт); Пользователи не подтвердившие свою личность не могут создавать посты. \n\n ID можно получить у президента школы либо разработчика: (добавить контакт)</string>
-</resources>
+ </resources>
