@@ -65,13 +65,13 @@
         android:strokeWidth="1"
         android:strokeColor="#c08c17" />
     <path
-        android:fillAlpha="1"
+        android:fillAlpha="0"
         android:fillColor="#000000"
         android:pathData="M53.53 30.1L46.45 30.1L52.6 19.61L45.09 19.61"
         android:strokeWidth="2"
         android:strokeColor="#c08c17" />
     <path
-        android:fillAlpha="1"
+        android:fillAlpha="0"
         android:fillColor="#000000"
         android:pathData="M43.3 31.02L39.64 19.61L37.98 19.61L33.75 30.81"
         android:strokeWidth="2"

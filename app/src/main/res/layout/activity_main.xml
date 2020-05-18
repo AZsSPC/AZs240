@@ -9,6 +9,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.25"
+        android:padding="8dp"
+        android:src="@drawable/icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tab_post"
         android:layout_width="match_parent"
@@ -42,12 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:onClick="menuFab"
+        android:src="@drawable/menu_item"
         app:backgroundTint="@color/primary"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/tab_post"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_dialer" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/fab_men"
@@ -65,12 +77,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:onClick="infoScreen"
+            android:src="@drawable/info_item"
             app:backgroundTint="@color/accent"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/tab_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_dialog_info" />
+            app:maxImageSize="32dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/sett_fab6"
@@ -78,12 +91,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:onClick="createPost"
+            android:src="@drawable/create_item"
             app:backgroundTint="@color/accent"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/tab_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/stat_notify_chat" />
+            app:maxImageSize="32dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/sett_fab4"
@@ -91,12 +105,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:onClick="reloadPosts"
+            android:src="@drawable/refresh_item"
             app:backgroundTint="@color/accent"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/tab_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/stat_notify_sync" />
+            app:maxImageSize="32dp" />
 
     </LinearLayout>
 

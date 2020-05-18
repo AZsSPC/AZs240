@@ -1,6 +1,7 @@
 package com.azspc.azchat240;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,59 +19,60 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
+import static android.provider.Telephony.Mms.Part.FILENAME;
+
 public class MainActivity extends AppCompatActivity {
-    //public static int language;
     public static final String sep_post = "║";
     public static final String sep_part = "│";
-    public static final String lang_separator = ";";
-    static final String url = "https://raw.githubusercontent.com/AZsSPC/test/master/README.md";
-    static final String saveName = "posts.txt";
-    static final String saveTo = "/storage/emulated/0/AZsSPC/AZs240";
+    final String url = "https://raw.githubusercontent.com/AZsSPC/test/master/README.md";
+    final String saveName = "posts";
     private RecyclerView recyclerView;
     boolean isModerator = false;
     boolean isMenuVisible = false;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onResume() {
         super.onResume();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-        reloadPosts(null);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //language = Locale.getDefault().getLanguage().equals("ua") ? 1 : 0;
         isModerator = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StrictMode.ThreadPolicy pol = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(pol);
+        closeMenu();
         recyclerView = findViewById(R.id.tab_post);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitAll().build());
+        reloadPosts(null);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private ArrayList<Post> getInitialData() {
         ArrayList<Post> posts = new ArrayList<>();
-        for (String post : getPostsFromCloud().split(sep_post)) {
+        for (String post : getStrDataPosts().split(sep_post)) {
             try {
                 String[] pre_p = post.split(sep_part);
                 posts.add(0, new Post(getResources(), pre_p[0], pre_p[1], pre_p[2]));
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                e.printStackTrace();
                 if (isModerator)
                     posts.add(0, new Post(getResources(), "Помилка читання поста", "Весь вміст:\n\n" + post, "-1"));
             }
@@ -78,70 +80,84 @@ public class MainActivity extends AppCompatActivity {
         return posts;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void reloadPosts(View v) {
-        closeMenu();
-        recyclerView.setAdapter(new DataAdapter(this, getInitialData()));
-    }
-
     public void menuFab(View v) {
         findViewById(R.id.fab_men).setVisibility((isMenuVisible = !isMenuVisible) ? View.VISIBLE : View.INVISIBLE);
     }
 
+    public void reloadPosts(View v) {
+        closeMenu();
+        Toast.makeText(getBaseContext(),
+                "Розпочато оновлення постів, це може зайняти час.",
+                Toast.LENGTH_LONG).show();
+        recyclerView.setAdapter(new DataAdapter(getBaseContext(), getInitialData()));
+    }
+
     public void infoScreen(View v) {
         closeMenu();
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
 
     public void createPost(View v) {
         closeMenu();
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        startActivity(intent);
     }
 
     void closeMenu() {
         findViewById(R.id.fab_men).setVisibility((isMenuVisible = false) ? View.VISIBLE : View.INVISIBLE);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    String getPostsFromCloud() {
-        String anotherPosts = "";
-        try {
-            Path path = Paths.get(getPostFile(saveName).getPath());
-            try {
-                Files.copy(new URL(url).openStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                Toast.makeText(getBaseContext(),
-                        "Розпочато оновлення постів, це може зайняти час.",
-                        Toast.LENGTH_LONG).show();
-            } catch (Exception ignored) {
-                Toast.makeText(getBaseContext(),
-                        "Погане підключення до інтернету, " +
-                                "будуть показані тільки раніше завантажені пости.",
-                        Toast.LENGTH_LONG).show();
-            }
-            anotherPosts = Files.lines(path).findFirst().orElse(null);
-        } catch (Exception ignored) {
-        }
-        return ("Про програму" + sep_part +
-                "Дякую що встановили цей додаток, " +
-                "теперь Ви можете слідкувати за новинами нашої школи!\n\n" +
-                "У додатку є кілька типів постів:\n" +
-                " • Сірий - системний\n" +
-                " • Синій - тихий\n" +
-                " • Зелений - звичайний\n" +
-                " • Червоний - терміновий\n\n" +
-                "Тип поста ні на що не впливає крім як швидкої класифікації" +
-                " поста для користувача. Простіше кажучи - що б Вам було зручніше.\n\n" +
-                "Додаток створено під керівництвом Олега Н. - нового президента школи.\n\n" +
-                "Гарного навчання та просто - удачі!" + sep_part +
-                "-1" + sep_post
-                + anotherPosts).replaceAll("\\\\n", "\n");
+    String getStrDataPosts() {
+        return ("Першо-пост" + sep_part +
+                "Це - просто найперший пост.\n\n" +
+                "Я раджу Вам подивитися інформацію про цей додаток, я думаю Ви зрозуміете де її знайти.\n\n" +
+                "   - Ратмир Мирошниченко (AZ_218)" + sep_part +
+                "-1" + sep_post + getPostsFromCloud()
+        ).replaceAll("\\\\n", "\n");
     }
 
+    String getPostsFromCloud() {
+        try {
+            ReadableByteChannel rbc = Channels.newChannel(new URL(this.url).openStream());
+            FileOutputStream fos = new FileOutputStream(new File(getFilesDir(), saveName));
+            fos.getChannel().transferFrom(rbc, 0, Build.VERSION.SDK_INT > 23 ? Long.MAX_VALUE : 8 * 1024);
+            fos.close();
+            rbc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getBaseContext(),
+                    "Файл не найден",
+                    Toast.LENGTH_LONG).show();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            Toast.makeText(getBaseContext(),
+                    "Погане підключення до інтернету, " +
+                            "будуть показані тільки раніше завантажені пости.",
+                    Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getBaseContext(),
+                    e + "",
+                    Toast.LENGTH_LONG).show();
+        }
+        try {
+            return new BufferedReader(new InputStreamReader(openFileInput(saveName))).readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Files.lines(path.toPath()).findFirst().orElse(null);
+
+        return "";
+    }
+/*
     public File getPostFile(String fileName) throws Exception {
-        File dir = new File(saveTo);
+        File dir = new File(getFilesDir(), saveName);
         File file = new File(dir, fileName);
         if (!file.exists()) if (dir.mkdirs() && file.createNewFile())
             Log.i("created new file", "the post file has been recreated");
         return file;
     }
-
+*/
 
 }
