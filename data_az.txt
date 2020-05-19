@@ -1,3 +1,3 @@
-posts│https://raw.githubusercontent.com/AZsSPC/AZs240/master/posts
+posts│https://raw.githubusercontent.com/AZsSPC/AZs240/master/posts.txt
 version│1
 update│none
