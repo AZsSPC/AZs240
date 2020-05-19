@@ -8,9 +8,11 @@
     <string name="tab_create">Створення поста</string>
 
     <string name="copy_button">Копіювати шаблон</string>
+    <string name="apply_button">Застосувати</string>
 
     <string name="hint_input_title">Зоголовок поста</string>
     <string name="hint_input_text">Текст поста</string>
+    <string name="hint_input_mode_code">Введіть код модератора</string>
 
     <string name="info">
     Вся інформація про програму:

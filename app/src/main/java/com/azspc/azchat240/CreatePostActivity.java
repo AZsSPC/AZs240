@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import static com.azspc.azchat240.MainActivity.isModerator;
 import static com.azspc.azchat240.MainActivity.sep_part;
 import static com.azspc.azchat240.MainActivity.sep_post;
 
@@ -33,9 +35,13 @@ public class CreatePostActivity extends AppCompatActivity implements SeekBar.OnS
     }
 
     public void copyToBuffer(View v) {
-        String copiedText = et_tt.getText() + sep_part + et_tx.getText() + sep_part + type + sep_post;
+        String copiedText = et_tt.getText() + sep_part + et_tx.getText() + sep_part + (type - 1)+ sep_post;
         android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(android.content.ClipData.newPlainText("Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
+        clipboard.setPrimaryClip(android.content.ClipData.newPlainText(
+                "Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
+        if (isModerator) Toast.makeText(getBaseContext(),
+                "Скопійовано в буфер обміну",
+                Toast.LENGTH_LONG).show();
     }
 
     public void backToPosts(View v) {
@@ -50,11 +56,13 @@ public class CreatePostActivity extends AppCompatActivity implements SeekBar.OnS
 
     int getTypeColor(int type) {
         switch (type) {
+            case 0:
+                if (isModerator) return R.color.t_system;
             default:
                 return R.color.t_normal;
-            case 1:
-                return R.color.t_spy;
             case 2:
+                return R.color.t_spy;
+            case 3:
                 return R.color.t_alarm;
         }
     }

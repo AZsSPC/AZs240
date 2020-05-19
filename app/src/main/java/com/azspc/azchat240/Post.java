@@ -26,10 +26,10 @@ public class Post {
 
     int initColor(String c) {
         switch (c) {
-            default:
-                return R.color.t_normal;
             case "-1":
                 return R.color.t_system;
+            default:
+                return R.color.t_normal;
             case "1":
                 return R.color.t_spy;
             case "2":
