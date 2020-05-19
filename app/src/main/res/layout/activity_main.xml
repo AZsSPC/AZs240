@@ -14,6 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.25"
+        android:contentDescription="@string/i_c_d"
         android:padding="8dp"
         android:src="@drawable/icon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +53,7 @@
         android:id="@+id/sett_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="24dp"
         android:onClick="menuFab"
         android:src="@drawable/menu_item"
         app:backgroundTint="@color/primary"
@@ -65,17 +66,17 @@
         android:id="@+id/fab_men"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sett_fab">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/sett_fab5"
+            android:id="@+id/info_fab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_margin="8dp"
             android:onClick="infoScreen"
             android:src="@drawable/info_item"
             app:backgroundTint="@color/accent"
@@ -86,10 +87,10 @@
             app:maxImageSize="32dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/sett_fab6"
+            android:id="@+id/create_fab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_margin="8dp"
             android:onClick="createPost"
             android:src="@drawable/create_item"
             app:backgroundTint="@color/accent"
@@ -100,12 +101,26 @@
             app:maxImageSize="32dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/sett_fab4"
+            android:id="@+id/refresh_fab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_margin="8dp"
             android:onClick="reloadPosts"
             android:src="@drawable/refresh_item"
+            app:backgroundTint="@color/accent"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toTopOf="@+id/tab_post"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:maxImageSize="32dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/setting_fab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:onClick="reloadPosts"
+            android:src="@drawable/settings_item"
             app:backgroundTint="@color/accent"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/tab_post"

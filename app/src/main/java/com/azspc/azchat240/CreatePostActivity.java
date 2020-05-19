@@ -35,7 +35,7 @@ public class CreatePostActivity extends AppCompatActivity implements SeekBar.OnS
     public void copyToBuffer(View v) {
         String copiedText = et_tt.getText() + sep_part + et_tx.getText() + sep_part + type + sep_post;
         android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(android.content.ClipData.newPlainText("Скопійовано в буфер обміну", copiedText));
+        clipboard.setPrimaryClip(android.content.ClipData.newPlainText("Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
     }
 
     public void backToPosts(View v) {

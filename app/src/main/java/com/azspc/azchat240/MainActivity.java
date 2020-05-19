@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
     }
 
@@ -86,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void reloadPosts(View v) {
         closeMenu();
-        Toast.makeText(getBaseContext(),
-                "Розпочато оновлення постів, це може зайняти час.",
-                Toast.LENGTH_LONG).show();
         recyclerView.setAdapter(new DataAdapter(getBaseContext(), getInitialData()));
     }
 
@@ -99,6 +97,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createPost(View v) {
+        closeMenu();
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        startActivity(intent);
+    }
+
+    public void settingsOpen(View v) {
         closeMenu();
         Intent intent = new Intent(this, CreatePostActivity.class);
         startActivity(intent);
