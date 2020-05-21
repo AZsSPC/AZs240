@@ -1,3 +1,3 @@
 urlPost│https://raw.githubusercontent.com/AZsSPC/AZs240/master/posts.txt
-version│3.8
+version│3.9
 urlUp│https://github.com/AZsSPC/AZs240/raw/master/News_240_by_AZ_218.apk
