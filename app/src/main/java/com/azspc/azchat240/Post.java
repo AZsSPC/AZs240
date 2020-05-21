@@ -2,8 +2,11 @@ package com.azspc.azchat240;
 
 import android.content.res.Resources;
 
+import static com.azspc.azchat240.MainActivity.isModerator;
+import static com.azspc.azchat240.MainActivity.splitter;
+
 public class Post {
-    String  title, text;
+    String title, text;
     int color;
 
     public int getColor() {
@@ -18,7 +21,7 @@ public class Post {
         return text;
     }
 
-    Post(Resources r,  String title, String text, String type) {
+    Post(Resources r, String title, String text, String type) {
         this.title = title;
         this.text = text;
         this.color = r.getColor(initColor(type));
@@ -26,13 +29,13 @@ public class Post {
 
     int initColor(String c) {
         switch (c) {
-            case "-1":
+            case "0":
                 return R.color.t_system;
             default:
                 return R.color.t_normal;
-            case "1":
-                return R.color.t_spy;
             case "2":
+                return R.color.t_spy;
+            case "3":
                 return R.color.t_alarm;
         }
     }

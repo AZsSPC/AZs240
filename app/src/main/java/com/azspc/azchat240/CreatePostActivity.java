@@ -10,8 +10,8 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import static com.azspc.azchat240.MainActivity.isModerator;
-import static com.azspc.azchat240.MainActivity.sep_part;
-import static com.azspc.azchat240.MainActivity.sep_post;
+import static com.azspc.azchat240.MainActivity.splitter;
+import static com.azspc.azchat240.MainActivity.separator;
 
 public class CreatePostActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
     int type = 0;
@@ -35,10 +35,10 @@ public class CreatePostActivity extends AppCompatActivity implements SeekBar.OnS
     }
 
     public void copyToBuffer(View v) {
-        String copiedText = et_tt.getText() + sep_part + et_tx.getText() + sep_part + (type - 1)+ sep_post;
-        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(android.content.ClipData.newPlainText(
-                "Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
+        String copiedText = et_tt.getText() + splitter + et_tx.getText() + splitter + type + separator;
+        ((android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE))
+                .setPrimaryClip(android.content.ClipData.newPlainText(
+                        "Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
         if (isModerator) Toast.makeText(getBaseContext(),
                 "Скопійовано в буфер обміну",
                 Toast.LENGTH_LONG).show();

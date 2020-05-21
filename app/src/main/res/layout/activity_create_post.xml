@@ -116,7 +116,7 @@
                 android:layout_marginEnd="16dp"
                 android:onClick="copyToBuffer"
                 android:text="@string/copy_button"
-                android:textAllCaps="false"
+                android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/c_text" />
 
