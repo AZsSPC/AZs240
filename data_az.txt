@@ -1,3 +1,3 @@
-1│https://raw.githubusercontent.com/AZsSPC/AZs240/master/posts.txt│ссылка с постами
-2│3.8│версия
-3│https://github.com/AZsSPC/AZs240/raw/master/app-debug.apk│ссылка обновления
+urlPost│https://raw.githubusercontent.com/AZsSPC/AZs240/master/posts.txt
+version│3.8
+urlUp│https://github.com/AZsSPC/AZs240/raw/master/app-debug.apk
