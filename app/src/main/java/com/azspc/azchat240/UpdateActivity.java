@@ -1,7 +1,5 @@
 package com.azspc.azchat240;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +8,7 @@ import android.view.View;
 import static com.azspc.azchat240.MainActivity.id_url_update;
 import static com.azspc.azchat240.MainActivity.sp;
 
-public class UpdateActivity extends AppCompatActivity {
+public class UpdateActivity extends Aztivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +16,9 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
     }
 
-    protected void onResume() {
-        super.onResume();
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
-    }
-
+    @Override
     public void backToPosts(View v) {
-        finish();
+        super.backToPosts(v);
     }
 
     public void updateFromCloud(View v) {

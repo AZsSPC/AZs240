@@ -2,19 +2,16 @@ package com.azspc.azchat240;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,25 +25,24 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    final String savePost = "posts";                         //CHANGEABLE
+    final String saveData = "data";                          //CHANGEABLE
+    public static final String version = "4.0";              //CHANGEABLE
     public static final String separator = "║";              //FINAL
     public static final String splitter = "│";               //FINAL
     public static final String id_moder = "isModer";         //FINAL
     public static final String id_url_posts = "urlPost";     //FINAL
     public static final String id_url_update = "urlUp";      //FINAL
     public static final String id_version = "version";       //FINAL
-    final String data_load_url = "https://raw.githubusercontent.com/AZsSPC/AZs240/master/data_az.txt";//FINAL
-    public static final String version = "4.0";              //CHANGEABLE
-    final String savePost = "posts";                         //CHANGEABLE
-    final String saveData = "data";                          //CHANGEABLE
+    final String data_load_url =                             //FINAL
+            "https://raw.githubusercontent.com/AZsSPC/AZs240/master/data_az.txt";
     private RecyclerView recyclerView;
     public static boolean isModerator = false;
     boolean isMenuVisible = false;
-    boolean isDataUpdated = false;
+    //boolean isDataUpdated = false;
     public static SharedPreferences sp;
 
     protected void onResume() {

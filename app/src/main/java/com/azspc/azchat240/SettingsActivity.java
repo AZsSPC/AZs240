@@ -1,17 +1,15 @@
 package com.azspc.azchat240;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static com.azspc.azchat240.MainActivity.isModerator;
 import static com.azspc.azchat240.MainActivity.id_moder;
+import static com.azspc.azchat240.MainActivity.isModerator;
 import static com.azspc.azchat240.MainActivity.sp;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends Aztivity {
     final String code = "CE4RF-NS-6KZNM";
 
     @Override
@@ -20,11 +18,9 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
     }
 
-    protected void onResume() {
-        super.onResume();
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
+    @Override
+    public void backToPosts(View v) {
+        super.backToPosts(v);
     }
 
     public void saveModerCode(View v) {
@@ -37,7 +33,4 @@ public class SettingsActivity extends AppCompatActivity {
         backToPosts(v);
     }
 
-    public void backToPosts(View v) {
-        finish();
-    }
 }
