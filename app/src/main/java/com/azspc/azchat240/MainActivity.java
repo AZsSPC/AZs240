@@ -27,23 +27,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-
-    final String savePost = "posts";                         //CHANGEABLE
-    final String saveData = "data";                          //CHANGEABLE
-    public static final String version = "4.0";              //CHANGEABLE
-    public static final String separator = "║";              //FINAL
-    public static final String splitter = "│";               //FINAL
-    public static final String id_moder = "isModer";         //FINAL
-    public static final String id_url_posts = "urlPost";     //FINAL
-    public static final String id_url_update = "urlUp";      //FINAL
-    public static final String id_version = "version";       //FINAL
-    final String data_load_url =                             //FINAL
-            "https://raw.githubusercontent.com/AZsSPC/AZs240/master/data_az.txt";
-    private RecyclerView recyclerView;
-    public static boolean isModerator = false;
-    boolean isMenuVisible = false;
-    //boolean isDataUpdated = false;
+    public static String
+            savePost = "posts",           //CHANGEABLE
+            saveData = "data",            //CHANGEABLE
+            version = "4.3",              //CHANGEABLE
+            separator = "║",              //FINAL
+            splitter = "│",               //FINAL
+            id_moder = "isModer",         //FINAL
+            id_url_posts = "urlPost",     //FINAL
+            id_url_update = "urlUp",      //FINAL
+            id_version = "version",       //FINAL
+            id_v_info = "vInfo",          //FINAL
+            data_load_url =               //FINAL
+                    "https://raw.githubusercontent.com/AZsSPC/AZs240/master/data_az.txt";
+    public static boolean
+            isModerator = false,
+            isMenuVisible = false;
     public static SharedPreferences sp;
+    private RecyclerView recyclerView;
 
     protected void onResume() {
         super.onResume();

@@ -8,8 +8,8 @@ android {
         applicationId "com.azspc.azchat240"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 3
-        versionName '3.0'
+        versionCode 4
+        versionName '4.3'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

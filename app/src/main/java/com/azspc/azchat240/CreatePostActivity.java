@@ -37,7 +37,7 @@ public class CreatePostActivity extends Aztivity implements SeekBar.OnSeekBarCha
         ((android.content.ClipboardManager) Objects.requireNonNull(getSystemService(Context.CLIPBOARD_SERVICE)))
                 .setPrimaryClip(android.content.ClipData.newPlainText(
                         "Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
-        if (isModerator) Toast.makeText(getBaseContext(),
+        Toast.makeText(getBaseContext(),
                 "Скопійовано в буфер обміну",
                 Toast.LENGTH_LONG).show();
     }
