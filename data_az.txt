@@ -1,4 +1,0 @@
-urlPost│https://raw.githubusercontent.com/AZsSPC/AZs240/master/posts.txt
-version│4.3
-urlUp│https://github.com/AZsSPC/AZs240/raw/master/News_240_by_AZ_218.apk
-vInfo│В данной версии я что-то обновил, что-то поправил, короче...%n%nПросто новая версия, просто обнови.
