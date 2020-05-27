@@ -9,4 +9,9 @@
     <color name="t_spy">#7EAABF</color>
     <color name="t_normal">#7CB342</color>
     <color name="t_alarm">#F4511E</color>
+    <color name="cheat_bg">#000000</color>
+    <color name="cheat_fg">#484848</color>
+    <color name="tt_menu_bg">#BFFFFFFF</color>
+    <color name="moder_but">#838383</color>
+    <color name="refresh_but">#E91E63</color>
 </resources>

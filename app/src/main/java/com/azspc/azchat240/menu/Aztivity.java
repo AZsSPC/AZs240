@@ -1,4 +1,4 @@
-package com.azspc.azchat240;
+package com.azspc.azchat240.menu;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

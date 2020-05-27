@@ -1,6 +1,5 @@
 package com.azspc.azchat240;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,27 +8,26 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends MenuLogic {
     public static String
             savePost = "posts",           //CHANGEABLE
             saveData = "data",            //CHANGEABLE
+            saveCheat = "cheat",            //CHANGEABLE
             version = "4.3",              //CHANGEABLE
             separator = "║",              //FINAL
             splitter = "│",               //FINAL
@@ -38,23 +36,25 @@ public class MainActivity extends AppCompatActivity {
             id_url_update = "urlUp",      //FINAL
             id_version = "version",       //FINAL
             id_v_info = "vInfo",          //FINAL
+            id_cheat = "isCheat",         //FINAL
             data_load_url =               //FINAL
-                    "https://raw.githubusercontent.com/AZsSPC/AZs240/master/data_az.txt";
+                    "https://raw.githubusercontent.com/AZsSPC/AZs240/master/usable/data_az.txt";
     public static boolean
-            isModerator = false,
+            isModer = false,
+            isCheater = false,
             isMenuVisible = false;
     public static SharedPreferences sp;
-    private RecyclerView recyclerView;
+    private RecyclerView postRecView;
 
     protected void onResume() {
         super.onResume();
-        isModerator = sp.getBoolean(id_moder, false);
+        findViewById(R.id.cheat_fab).setVisibility((isCheater =
+                sp.getBoolean(id_cheat, false)) ? View.VISIBLE : View.INVISIBLE);
+        findViewById(R.id.version_fab).setVisibility((isModer =
+                sp.getBoolean(id_moder, false)) ? View.VISIBLE : View.INVISIBLE);
         getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        if (isModerator) Toast.makeText(getBaseContext(),
-                "Режим модератора активирован",
-                Toast.LENGTH_LONG).show();
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        reloadPosts(null);
     }
 
     @Override
@@ -62,9 +62,8 @@ public class MainActivity extends AppCompatActivity {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        closeMenu();
-        recyclerView = findViewById(R.id.tab_post);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        postRecView = findViewById(R.id.post_list);
+        postRecView.setLayoutManager(new LinearLayoutManager(this));
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitAll().build());
         firstRead();
     }
@@ -83,78 +82,30 @@ public class MainActivity extends AppCompatActivity {
                                 "Обновите приложение до новой версии.\n" +
                                 "С (" + version + ") до (" + sp.getString(id_version, "error") + ")",
                         Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, UpdateActivity.class));
+                versionInfo(null);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private ArrayList<Post> getInitialData() {
-        ArrayList<Post> ret = new ArrayList<>();
-        String[] posts = getFromCloud(sp.getString(id_url_posts, "no url"), savePost);
-        for (String post : posts)
-            try {
-                String[] d = post.replaceAll("\\\\n", "\n").split(splitter);
-                ret.add(0, new Post(getResources(), d[0], d[1], d[2]));
-            } catch (Exception e) {
-                e.printStackTrace();
-                if (isModerator)
-                    ret.add(0, new Post(getResources(), "! Ошибка чтения !", post, "0"));
-            }
 
-        return ret;
-    }
-
-    public void menuFab(View v) {
-        findViewById(R.id.fab_men).setVisibility((isMenuVisible = !isMenuVisible) ? View.VISIBLE : View.INVISIBLE);
-    }
-
-    public void reloadPosts(View v) {
-        closeMenu();
-        recyclerView.setAdapter(new DataAdapter(getBaseContext(), getInitialData()));
-    }
-
-    public void infoScreen(View v) {
-        closeMenu();
-        startActivity(new Intent(this, InfoActivity.class));
-    }
-
-    public void createPost(View v) {
-        closeMenu();
-        startActivity(new Intent(this, CreatePostActivity.class));
-    }
-
-    public void settingsOpen(View v) {
-        closeMenu();
-        startActivity(new Intent(this, SettingsActivity.class));
-    }
-
-    void closeMenu() {
-        findViewById(R.id.fab_men).setVisibility((isMenuVisible = false) ? View.VISIBLE : View.INVISIBLE);
-    }
-
-    String[] getFromCloud(String url, String dName) {
+    public String[] getFromCloud(String url, String dName) {
         try {
             ReadableByteChannel rbc = Channels.newChannel(new URL(url).openStream());
             FileOutputStream fos = new FileOutputStream(new File(getFilesDir(), dName));
             fos.getChannel().transferFrom(rbc, 0, Build.VERSION.SDK_INT > 23 ? Long.MAX_VALUE : 8 * 1024);
             fos.close();
             rbc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Toast.makeText(getBaseContext(),
-                    "Файл не знайдено",
-                    Toast.LENGTH_SHORT).show();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            Toast.makeText(getBaseContext(),
-                    e + "",
-                    Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getBaseContext(),
-                    "Погане підключення до інтернету",
+                    "Погане підключення до інтернету, неможливо оновити пости.",
+                    Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getBaseContext(),
+                    e + "",
                     Toast.LENGTH_SHORT).show();
         }
         try {
@@ -167,5 +118,34 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return new String[]{"no data"};
+    }
+
+
+    public void reloadPosts(View v) {
+        hideMenu(findViewById(R.id.fab_menu_0));
+        postRecView.setAdapter(new PostAdapter(getBaseContext(), getInitialData()));
+    }
+
+    private ArrayList<Post> getInitialData() {
+        ArrayList<Post> ret = new ArrayList<>();
+        String[] posts = getFromCloud(sp.getString(id_url_posts, "no url"), savePost);
+        int i = 0;
+        int i1 = 0;
+        int i2 = 0;
+        for (String post : posts) {
+            try {
+                String[] d = post.split(splitter);
+                ret.add(0, new Post(getResources(), d[0], d[1].replaceAll("%n", "\n"), d[2]));
+                i1++;
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (isModer)
+                    ret.add(0, new Post(getResources(), "! Ошибка чтения !", post, "0"));
+                i2++;
+            }
+            i++;
+        }
+        ret.add(0, new Post(getResources(), "# Статистика", i1 + "/" + i2 + "/" + posts.length + "-" + i, "0"));
+        return ret;
     }
 }

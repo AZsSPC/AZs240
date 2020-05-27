@@ -1,7 +1,9 @@
-package com.azspc.azchat240;
+package com.azspc.azchat240.menu;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.azspc.azchat240.R;
 
 public class InfoActivity extends Aztivity {
 

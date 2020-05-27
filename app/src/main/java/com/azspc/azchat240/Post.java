@@ -2,9 +2,6 @@ package com.azspc.azchat240;
 
 import android.content.res.Resources;
 
-import static com.azspc.azchat240.MainActivity.isModerator;
-import static com.azspc.azchat240.MainActivity.splitter;
-
 public class Post {
     String title, text;
     int color;

@@ -1,4 +1,4 @@
-package com.azspc.azchat240;
+package com.azspc.azchat240.menu;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,9 +7,11 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.azspc.azchat240.R;
+
 import java.util.Objects;
 
-import static com.azspc.azchat240.MainActivity.isModerator;
+import static com.azspc.azchat240.MainActivity.isModer;
 import static com.azspc.azchat240.MainActivity.separator;
 import static com.azspc.azchat240.MainActivity.splitter;
 
@@ -36,7 +38,7 @@ public class CreatePostActivity extends Aztivity implements SeekBar.OnSeekBarCha
         String copiedText = et_tt.getText() + splitter + et_tx.getText() + splitter + type + separator;
         ((android.content.ClipboardManager) Objects.requireNonNull(getSystemService(Context.CLIPBOARD_SERVICE)))
                 .setPrimaryClip(android.content.ClipData.newPlainText(
-                        "Скопійовано в буфер обміну", copiedText.replaceAll("\n", "\\\\n")));
+                        "Скопійовано в буфер обміну", copiedText.replaceAll("\n", "%n")));
         Toast.makeText(getBaseContext(),
                 "Скопійовано в буфер обміну",
                 Toast.LENGTH_LONG).show();
@@ -51,7 +53,7 @@ public class CreatePostActivity extends Aztivity implements SeekBar.OnSeekBarCha
     int getTypeColor(int type) {
         switch (type) {
             case 0:
-                if (isModerator) return R.color.t_system;
+                if (isModer) return R.color.t_system;
             default:
                 return R.color.t_normal;
             case 2:

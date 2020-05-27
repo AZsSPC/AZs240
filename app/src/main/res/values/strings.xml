@@ -6,6 +6,7 @@
     <string name="tab_settings">Мій кабінет</string>
     <string name="tab_info">Інформація</string>
     <string name="tab_create">Створення поста</string>
+    <string name="tab_cheat"># Шпоры</string>
 
     <string name="copy_button">Копіювати шаблон</string>
     <string name="apply_button">Застосувати</string>
@@ -14,7 +15,7 @@
 
     <string name="hint_input_title">Зоголовок поста</string>
     <string name="hint_input_text">Текст поста</string>
-    <string name="hint_input_mode_code">Введіть код модератора</string>
+    <string name="hint_input_mode_code">Введіть код</string>
 
     <string name="info">
     Вся інформація про програму:
@@ -33,7 +34,7 @@
 \n\n
     Тип поста ні на що не впливає крім як швидкої класифікації поста для користувача. Простіше кажучи - що б Вам було зручніше.
 \n\n
-    Додаток створено під керівництвом Олега Н. - кращого кандидата школи.
+    Додаток створено під керівництвом Олега Н. - нового президента школи.
 \n\n
     До речі, все що Ви тут бачите зроблено вручну єдиним розробником. 
     Бачите, головне - дати хороший стимул і бажання, і навіть такі як можуть зробити щось дотепне!
@@ -62,5 +63,7 @@
      - Про версію %vNew%:
 \n\n
     %vInf%</string>
+
+    <string name="menu">Ви знаходитесь в меню\n\nВиберіть один з пунктів, або натисніть на екран</string>
 
 </resources>

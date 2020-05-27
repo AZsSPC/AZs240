@@ -4,33 +4,32 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
+class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<Post> phones;
+    private List<Post> posts;
 
-    DataAdapter(Context context, List<Post> phones) {
-        this.phones = phones;
+    PostAdapter(Context context, List<Post> posts) {
+        this.posts = posts;
         this.inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.post, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DataAdapter.ViewHolder holder, int position) {
-        Post post = phones.get(position);
+    public void onBindViewHolder(PostAdapter.ViewHolder holder, int position) {
+        Post post = posts.get(position);
         holder.text.setText(post.getText());
         holder.title.setText(post.getTitle());
         holder.title.setBackgroundColor(post.getColor());
@@ -38,7 +37,7 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return phones.size();
+        return posts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

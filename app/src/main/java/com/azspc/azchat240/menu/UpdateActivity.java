@@ -1,4 +1,4 @@
-package com.azspc.azchat240;
+package com.azspc.azchat240.menu;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.azspc.azchat240.R;
 
 import java.util.Objects;
 
@@ -42,5 +45,8 @@ public class UpdateActivity extends Aztivity {
         ((android.content.ClipboardManager) Objects.requireNonNull(getSystemService(Context.CLIPBOARD_SERVICE)))
                 .setPrimaryClip(android.content.ClipData.newPlainText(
                         "Скопійовано в буфер обміну", sp.getString(id_url_update, "no url")));
+        Toast.makeText(getBaseContext(),
+                "Скопійовано в буфер обміну",
+                Toast.LENGTH_LONG).show();
     }
 }
