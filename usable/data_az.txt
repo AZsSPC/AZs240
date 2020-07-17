@@ -1,4 +1,4 @@
-urlPost│no
-version│old
+urlPost│YOU NEED UPDATE
+version│YOU NEED UPDATE
 urlUp│https://github.com/AZsSPC/Newsline240/raw/master/usable/apks/Newsline240_v2-4-5.apk
-vInfo│error
+vInfo│YOU NEED UPDATE
